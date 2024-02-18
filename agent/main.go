@@ -23,6 +23,7 @@ func main() {
 
 	lib.Setup()
 
+	// открываем очередь
 	queue, err := lib.RbMQ.Channel.QueueDeclare(
 		lib.Getenv("RABBITMQ_QUEUE", "expressions"),
 		false,
@@ -52,6 +53,7 @@ func main() {
 		log.Fatal(err.Error())
 	}
 
+	// получаем число - количество горутин
 	goroutinesCount, err := strconv.Atoi(lib.Getenv("AGENT_GOROUTINES", "5"))
 	if err != nil {
 		goroutinesCount = 5
@@ -60,6 +62,7 @@ func main() {
 	for i := 0; i < goroutinesCount; i++ {
 		go func() {
 			for {
+				// получаем сообщение
 				message := <-msgs
 
 				body, err := io.ReadAll(bytes.NewReader(message.Body))
@@ -74,16 +77,19 @@ func main() {
 					return
 				}
 
+				// делаем статус вычисляется
 				e.Status = "in_progress"
 				e.AgentId = lib.Id
 				e.Submit()
 
+				// вычисляем
 				e.Calculate()
 				e.Submit()
 			}
 		}()
 	}
 
+	// цикл, который каждые 30 секунд пингует бэкенд и обновляет настройки
 	for {
 		time.Sleep(30 * time.Second)
 

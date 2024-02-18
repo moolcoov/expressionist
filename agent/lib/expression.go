@@ -29,21 +29,25 @@ type Expression struct {
 	AgentId         uuid.UUID    `json:"agentId" db:"agent_id"` // id агента
 }
 
+// Calculate вычисляет значение выражения
 func (e *Expression) Calculate() {
 	infix, _ := shuntingYard.Scan(e.Expression)
 
-	postfix, err := shuntingYard.Parse(infix)
+	// получаем постфиксную запись
+	postfix, err := parse(infix)
 	if err != nil {
 		e.error()
 		return
 	}
 
-	res, err := shuntingYard.Evaluate(postfix)
+	// вычисляем её
+	res, err := evaluate(postfix)
 	if err != nil {
 		e.error()
 		return
 	}
 
+	// определяем время вычисления
 	calculationTime := 0
 
 	for _, token := range infix {
@@ -59,17 +63,20 @@ func (e *Expression) Calculate() {
 		}
 	}
 
+	// ждем и записываем результат
 	time.Sleep(time.Duration(calculationTime) * time.Millisecond)
 
-	e.Result = strconv.Itoa(res)
+	e.Result = strconv.FormatFloat(res, 'g', -1, 64)
 	e.Status = statusCalculated
 }
 
+// error делает выражение ошибочным
 func (e *Expression) error() {
 	e.Status = statusErrored
 	e.CalculationTime.Time = time.Now()
 }
 
+// Submit отправляет код на бэкенд
 func (e *Expression) Submit() {
 	body, err := json.Marshal(e)
 	if err != nil {

@@ -2,6 +2,7 @@ package lib
 
 import "fmt"
 
+// Setup настраивает всё
 func Setup() {
 	SetupRabbit()
 	Register()

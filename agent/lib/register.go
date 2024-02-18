@@ -14,6 +14,7 @@ import (
 
 var Id uuid.UUID
 
+// Register регистрирует агента на сервере
 func Register() {
 	Id = uuid.New()
 
@@ -45,6 +46,7 @@ func Register() {
 	fmt.Println("SETUP: Successfully registered!")
 }
 
+// Ping пингует сервер
 func Ping() {
 	req, err := http.NewRequestWithContext(context.Background(), "GET", Getenv("BACKEND_ADDRESS", "http://orchestra:8080")+"/ping?id="+Id.String(), nil)
 	if err != nil {
