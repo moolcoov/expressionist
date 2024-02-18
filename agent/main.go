@@ -8,6 +8,7 @@ import (
 	"io"
 	"log"
 	"os"
+	"strconv"
 	"time"
 
 	"github.com/joho/godotenv"
@@ -51,7 +52,12 @@ func main() {
 		log.Fatal(err.Error())
 	}
 
-	for i := 0; i < 5; i++ {
+	goroutinesCount, err := strconv.Atoi(lib.Getenv("AGENT_GOROUTINES", "5"))
+	if err != nil {
+		goroutinesCount = 5
+	}
+
+	for i := 0; i < goroutinesCount; i++ {
 		go func() {
 			for {
 				message := <-msgs

@@ -10,7 +10,7 @@ export async function addExpression({
         dispatchTime: { Time: new Date().toISOString() },
     };
 
-    const res: Response = await fetch("http://orchestra:8080/new", {
+    const res: Response = await fetch(`${process.env.BACKEND_ADDRESS}/new`, {
         headers: {
             "Content-Type": "application/json",
         },
@@ -27,7 +27,7 @@ export async function addExpression({
 }
 
 export async function updateSettings(settings: OrchestraSettings) {
-    const res = await fetch("http://orchestra:8080/settings/update", {
+    const res = await fetch(`${process.env.BACKEND_ADDRESS}/settings/update`, {
         method: "POST",
         body: JSON.stringify(settings),
     });

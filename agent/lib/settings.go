@@ -33,7 +33,7 @@ func UpdateSettings() {
 	ctx, cancel := context.WithTimeout(context.Background(), 5*time.Second)
 	defer cancel()
 
-	req, err := http.NewRequestWithContext(ctx, "GET", "http://orchestra:8080/settings", nil)
+	req, err := http.NewRequestWithContext(ctx, "GET", Getenv("BACKEND_ADDRESS", "http://orchestra:8080")+"/settings", nil)
 	if err != nil {
 		return
 	}

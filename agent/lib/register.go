@@ -26,7 +26,7 @@ func Register() {
 		return
 	}
 
-	req, err := http.NewRequestWithContext(ctx, "POST", "http://orchestra:8080/register", bytes.NewReader(body))
+	req, err := http.NewRequestWithContext(ctx, "POST", Getenv("BACKEND_ADDRESS", "http://orchestra:8080")+"/register", bytes.NewReader(body))
 	if err != nil {
 		return
 	}
@@ -46,7 +46,7 @@ func Register() {
 }
 
 func Ping() {
-	req, err := http.NewRequestWithContext(context.Background(), "GET", "http://orchestra:8080/ping?id="+Id.String(), nil)
+	req, err := http.NewRequestWithContext(context.Background(), "GET", Getenv("BACKEND_ADDRESS", "http://orchestra:8080")+"/ping?id="+Id.String(), nil)
 	if err != nil {
 		fmt.Println(err.Error())
 		return

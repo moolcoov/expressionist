@@ -67,6 +67,8 @@ services:
         container_name: expressionist-redis
         image: redis:7.2.4
         restart: always
+        ports:
+            - "6379:6379"
         volumes:
             - redisdata:/var/lib/redis
         networks:
@@ -85,6 +87,7 @@ services:
             - rabbitmqdata:/var/lib/rabbitmq
         ports:
             - 15672:15672
+            - 5672:5672
         healthcheck:
             test: ["CMD", "rabbitmqctl", "status"]
             interval: 5s
