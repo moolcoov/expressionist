@@ -5,7 +5,6 @@ import useSWR, { useSWRConfig } from "swr";
 import { Setting } from "./Setting";
 import { useRef, useState } from "react";
 import cn from "classnames";
-import { Dimmer, Loader } from "semantic-ui-react";
 import { Spinner } from "@/components/Spinner";
 
 export function Settings(): JSX.Element {
