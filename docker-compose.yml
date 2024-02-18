@@ -1,0 +1,103 @@
+version: "3.9"
+
+services:
+    orchestra:
+        container_name: expressionist-orchestra
+        image: expressionist-orchestra
+        build:
+            context: "./orchestra"
+        ports:
+            - "8080:8080"
+        restart: unless-stopped
+        environment:
+            - ENVIRONMENT=docker
+        env_file:
+            - .env
+        networks:
+            - expressionist-network
+        depends_on:
+            pg:
+                condition: service_started
+            redis:
+                condition: service_started
+            rabbitmq:
+                condition: service_healthy
+
+    client:
+        container_name: expressionist-client
+        image: expressionist-client
+        build:
+            context: "./client"
+        ports:
+            - "3000:3000"
+        restart: unless-stopped
+        networks:
+            - expressionist-network
+
+    agent:
+        container_name: expressionist-agent
+        image: expressionist-agent
+        build:
+            context: "./agent"
+        restart: unless-stopped
+        environment:
+            - ENVIRONMENT=docker
+        env_file:
+            - .env
+        networks:
+            - expressionist-network
+        depends_on:
+            orchestra:
+                condition: service_started
+
+    pg:
+        container_name: expressionist-postgres
+        image: postgres:16.2
+        restart: always
+        environment:
+            POSTGRES_DB: ${POSTGRES_DB}
+            POSTGRES_USER: ${POSTGRES_USER}
+            POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
+        volumes:
+            - pgdata:/var/lib/postgresql
+        networks:
+            - expressionist-network
+
+    redis:
+        container_name: expressionist-redis
+        image: redis:7.2.4
+        restart: always
+        volumes:
+            - redisdata:/var/lib/redis
+        networks:
+            - expressionist-network
+
+    rabbitmq:
+        container_name: expressionist-rabbitmq
+        image: rabbitmq:3.12.12-management
+        hostname: rabbitmq
+        restart: always
+        environment:
+            RABBITMQ_DEFAULT_USER: ${RABBITMQ_USER}
+            RABBITMQ_DEFAULT_PASS: ${RABBITMQ_PASSWORD}
+            RABBITMQ_SERVER_ADDITIONAL_ERL_ARGS: "-rabbit log_levels [{connection,error},{default,error}] disk_free_limit 2147483648"
+        volumes:
+            - rabbitmqdata:/var/lib/rabbitmq
+        ports:
+            - 15672:15672
+        healthcheck:
+            test: ["CMD", "rabbitmqctl", "status"]
+            interval: 5s
+            timeout: 15s
+            retries: 5
+        networks:
+            - expressionist-network
+
+volumes:
+    pgdata:
+    redisdata:
+    rabbitmqdata:
+
+networks:
+    expressionist-network:
+        driver: bridge
