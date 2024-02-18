@@ -1,6 +1,11 @@
 "use client";
 
 import { Settings } from "./Settings";
+import { Metadata } from "next";
+
+export const metadata: Metadata = {
+    title: "Настройки",
+};
 
 export default function SettingsPage() {
     return (

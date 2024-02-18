@@ -1,5 +1,10 @@
 import { Expressions } from "./Expressions";
 import { ExpressionInput } from "./ExpressionInput";
+import { Metadata } from "next";
+
+export const metadata: Metadata = {
+    title: "Выражения"
+}
 
 export default function HomePage() {
     return (
