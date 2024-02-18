@@ -14,8 +14,6 @@ import (
 )
 
 const (
-	statusCreated    = "created"
-	statusInProgress = "in_progress"
 	statusCalculated = "calculated"
 	statusErrored    = "errored"
 )
@@ -78,7 +76,7 @@ func (e *Expression) Submit() {
 		return
 	}
 
-	req, err := http.NewRequestWithContext(context.Background(), "POST", "http://localhost:8080/submit", bytes.NewReader(body))
+	req, err := http.NewRequestWithContext(context.Background(), "POST", Getenv("BACKEND_ADDRESS", "http://orchestra:8080")+"/submit", bytes.NewReader(body))
 	if err != nil {
 		return
 	}

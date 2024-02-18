@@ -12,9 +12,8 @@ var (
 	RbMQ = &RabbitWithMutex{Mu: &sync.RWMutex{}}
 
 	rbaddress = Getenv("RABBITMQ_ADDRESS", "localhost:5672")
-	//rbchan    = Getenv("RABBITMQ_CHANNEL", "expressions")
-	rbuser = Getenv("RABBITMQ_USER", "guest")
-	rbpass = Getenv("RABBITMQ_PASSWORD", "guest")
+	rbuser    = Getenv("RABBITMQ_USER", "guest")
+	rbpass    = Getenv("RABBITMQ_PASSWORD", "guest")
 )
 
 // RabbitWithMutex Подключение и канал RabbitMQ с мьютексом для защиты от гонки

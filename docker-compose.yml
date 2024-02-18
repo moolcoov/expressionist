@@ -35,7 +35,6 @@ services:
             - expressionist-network
 
     agent:
-        container_name: expressionist-agent
         image: expressionist-agent
         build:
             context: "./agent"
