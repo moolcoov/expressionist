@@ -85,7 +85,7 @@ go func() {
 
 Схема оркестратора в конце концов выглядит так:
 
-![s](./github/media/orchestra.png)
+![s](./.github/media/orchestra.png)
 
 ### 2. Агенты
 
@@ -101,7 +101,7 @@ go func() {
 
 Схема:
 
-![](./github/media/agent.png)
+![](./.github/media/agent.png)
 
 ### 3. Клиент
 
@@ -123,4 +123,4 @@ const { data, error, isLoading } = useSWR(..., fetcher)
 
 Схема:
 
-![](./github/media/client.png)
+![](./.github/media/client.png)
