@@ -90,7 +90,7 @@ export function Settings(): JSX.Element {
         <form className="flex flex-col gap-5" onSubmit={onSubmit}>
             <Setting
                 slug="additionTime"
-                label="Время сложения"
+                label="Время сложения (в мс)"
                 defaultValue={data.additionTime}
                 symbol="+"
                 ref={additionRef}
@@ -98,7 +98,7 @@ export function Settings(): JSX.Element {
             />
             <Setting
                 slug="subtractionTime"
-                label="Время вычитания"
+                label="Время вычитания (в мс)"
                 defaultValue={data.subtractionTime}
                 symbol="-"
                 ref={subtractionRef}
@@ -106,7 +106,7 @@ export function Settings(): JSX.Element {
             />
             <Setting
                 slug="multiplicationTime"
-                label="Время умножения"
+                label="Время умножения (в мс)"
                 defaultValue={data.multiplicationTime}
                 symbol="*"
                 ref={multiplicationRef}
@@ -114,7 +114,7 @@ export function Settings(): JSX.Element {
             />
             <Setting
                 slug="divisionTime"
-                label="Время деления"
+                label="Время деления (в мс)"
                 defaultValue={data.divisionTime}
                 symbol="/"
                 ref={divisionRef}
@@ -122,7 +122,7 @@ export function Settings(): JSX.Element {
             />
             <Setting
                 slug="inactiveAgentTime"
-                label="Время отображения неактивного агента"
+                label="Время отображения неактивного агента (в с)"
                 defaultValue={data.inactiveAgentTime}
                 ref={inactiveAgentRef}
                 onChange={onChange}
