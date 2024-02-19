@@ -7,7 +7,7 @@ import { Agent } from "./Agent";
 export function Agents(): JSX.Element {
     // Получение агентов с бэка
     const { data, error, isLoading } = useSWR<OrchestraAgents, Error>(
-        `${process.env.BACKEND_ADDRESS_CLIENT}/agents`,
+        `http://localhost:8080/agents`,
         (url: string) =>
             fetcher(url, {
                 cache: "no-store",

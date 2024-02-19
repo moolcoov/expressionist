@@ -7,7 +7,7 @@ import { Spinner } from "@/components/Spinner";
 export function Expressions(): JSX.Element {
     // Получение выражений с бэка
     const { data, error, isLoading } = useSWR<OrchestraExpressions, Error>(
-        `${process.env.BACKEND_ADDRESS_CLIENT}/list`,
+        `http://localhost:8080/list`,
         (url: string) =>
             fetcher(url, {
                 cache: "no-store",

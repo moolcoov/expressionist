@@ -19,7 +19,6 @@ func main() {
 	// Подключаем .env файлы
 	if os.Getenv("ENVIRONMENT") != "docker" {
 		godotenv.Load("../.env")
-		godotenv.Load("../.env.local")
 	}
 
 	// Настраиваем сервисы

@@ -20,7 +20,7 @@ export function Settings(): JSX.Element {
 
     // Получение настроек с бэка
     const { data, error, isLoading } = useSWR<OrchestraSettings>(
-        `${process.env.BACKEND_ADDRESS_CLIENT}/settings`,
+        `http://localhost:8080/settings`,
         (url: string) =>
             fetcher(url, {
                 cache: "no-store",
