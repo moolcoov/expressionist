@@ -9,3 +9,6 @@ func Getenv(key string, defaultValue string) string {
 	}
 	return value
 }
+
+// «Если заблудился в коде - иди домой»
+//                  (c) Джейсон Стэтхэм
