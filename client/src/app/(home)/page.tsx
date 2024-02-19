@@ -3,8 +3,8 @@ import { ExpressionInput } from "./ExpressionInput";
 import { Metadata } from "next";
 
 export const metadata: Metadata = {
-    title: "Выражения"
-}
+    title: "Выражения",
+};
 
 export default function HomePage() {
     return (
@@ -19,3 +19,23 @@ export default function HomePage() {
         </main>
     );
 }
+
+// ░░░██████░░░
+// ░░░██████░░░
+// ░░░█▀▀▀▀█░░░
+// ░░░█▄▄▄▄█░░░
+// ░░░██████░░░
+// ░░▄██████▄░░
+// ▄██████████▄
+// ████████████
+// ████████████
+// ████████████
+// █▀▀▀▀▀██████
+// █░░░░░██████
+// █░░░░░██████
+// █░░░░░██████
+// █░░░░░██████
+// █▄▄▄▄▄██████
+// ████████████
+// ████████████
+// ████████████
