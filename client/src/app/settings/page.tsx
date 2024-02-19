@@ -1,5 +1,3 @@
-"use client";
-
 import { Settings } from "./Settings";
 import { Metadata } from "next";
 
